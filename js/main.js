@@ -3,18 +3,25 @@ function Ball(x, y, radius) {
 	this.x = x;
 	this.y = y;
 
-	this.speeds = {
+	this.acceleration = {
 		x: 0, // right-to-left tilt: 0 = level, 1 = way left, -1 = way right
 		y: 0, // front-to-back tilt: 0 = level, 1 = backward, -1 = forward
 		z: 0  // vertical acceleration: moving device upward makes this go down, 1 = standard earth gravity
 	};
 
-	this.setSpeeds = function(orientData) {
-		this.speeds = orientData;
+	this.speeds = {
+		x: 0,
+		y: 0,
+		z: 0
+	};
+
+	this.setAcceleration = function(orientData) {
+		this.acceleration = orientData;
 	};
 
 	this.move = function() {
-		this.position.x
+		this.position.x -= this.acceleration.x;
+		this.position.y 
 
 		this.draw();
 	};
@@ -44,6 +51,6 @@ $(function() {
 	var ball = new Ball(width/2, 0, BALL_RADIUS);
 
 
-	window.addEventListener("MozOrientation", ball.setSpeeds, true);  
+	window.addEventListener("MozOrientation", ball.setAcceleration, true);  
 	setInterval(ball.move, 1000 / FRAMES_PER_SECOND);
 });
