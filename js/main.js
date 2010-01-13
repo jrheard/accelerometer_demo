@@ -1,11 +1,7 @@
 function Ball(x, y, radius) {
 	this.radius = radius;
-
-	this.position = {
-		x: 0,
-		y: 0,
-		z: 0
-	};
+	this.x = x;
+	this.y = y;
 
 	this.speeds = {
 		x: 0, // right-to-left tilt: 0 = level, 1 = way left, -1 = way right
@@ -13,15 +9,12 @@ function Ball(x, y, radius) {
 		z: 0  // vertical acceleration: moving device upward makes this go down, 1 = standard earth gravity
 	};
 
-
 	this.setSpeeds = function(orientData) {
 		this.speeds = orientData;
 	};
 
 	this.move = function() {
-		for(dimension in this.position) {
-			//use this.speeds[dimension]
-		}
+		this.position.x
 
 		this.draw();
 	};
@@ -32,7 +25,7 @@ function Ball(x, y, radius) {
 
 		ctx.beginPath();
 		ctx.fillStyle = "#000";
-		ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
+		ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI*2, true);
 		ctx.closePath();
 		ctx.fill();
 	};
