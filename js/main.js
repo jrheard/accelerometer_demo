@@ -32,20 +32,20 @@ function Ball(x, y, radius) {
 
 		self.x -= self.speed.x;
 		// check bounds
-		if(self.x - radius < 0) {
-			self.x = radius;
+		if(self.x - self.radius < 0) {
+			self.x = self.radius;
 			self.speed.x = 0;
-		} else if(self.x + radius > canvas.width) {
-			self.x = canvas.width - radius;
+		} else if(self.x + self.radius > canvas.width) {
+			self.x = canvas.width - self.radius;
 			self.speed.x = 0;
 		}
 
 		self.y -= self.speed.y;
-		if(self.y - radius < 0) {
-			self.y = radius;
+		if(self.y - self.radius < 0) {
+			self.y = self.radius;
 			self.speed.y = 0;
-		} else if(self.y + radius > canvas.height) {
-			self.y = canvas.height - radius;
+		} else if(self.y + self.radius > canvas.height) {
+			self.y = canvas.height - self.radius;
 			self.speed.y = 0;
 		}
 
