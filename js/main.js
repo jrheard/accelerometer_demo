@@ -20,48 +20,42 @@ function Ball(x, y, radius) {
 		self.acceleration = orientData;
 	};
 
-	function updateSpeeds() {
+	this.updateSpeeds = function() {
 		for(var dimension in self.speed) {
 			self.speed[dimension] += self.acceleration[dimension];
 		}
 	};
 
 	this.move = function() {
-		updateSpeeds();
+		self.updateSpeeds();
 		var canvas = $("#canvas").get(0);
-		canvas.width = canvas.width;
-
-		/* for each dimension:
-			set dimension
-			check bounds
-			if at bounds, make sure we're inside the box
-			and set the speed to 0 */
 
 		self.x -= self.speed.x;
 		// check bounds
-		if(self.x - radius/2 < 0) {
-			self.x = radius/2;
+		if(self.x - radius < 0) {
+			self.x = radius;
 			self.speed.x = 0;
-		} else if(self.x + radius/2 > canvas.width) {
-			self.x = canvas.width - radius/2;
+		} else if(self.x + radius > canvas.width) {
+			self.x = canvas.width - radius;
 			self.speed.x = 0;
 		}
 
 		self.y -= self.speed.y;
-		if(self.y - radius/2 < 0) {
-			self.y = radius/2;
+		if(self.y - radius < 0) {
+			self.y = radius;
 			self.speed.y = 0;
-		} else if(self.y + radius/2 > canvas.height) {
-			self.y = canvas.height - radius/2;
+		} else if(self.y + radius > canvas.height) {
+			self.y = canvas.height - radius;
 			self.speed.y = 0;
 		}
 
-		draw();
+		self.draw();
 	};
 
-	function draw() {
+	this.draw = function() {
 		var canvas = $("#canvas").get(0);
 		var ctx = canvas.getContext("2d");
+		canvas.width = canvas.width; // clear canvas
 
 		ctx.beginPath();
 		ctx.fillStyle = "#000";
@@ -72,7 +66,7 @@ function Ball(x, y, radius) {
 }
 
 $(function() {
-	var FRAMES_PER_SECOND = 30;
+	var FRAMES_PER_SECOND = 40;
 	var BALL_RADIUS = 50;
 
 	var canvas = $("#canvas").get(0);
